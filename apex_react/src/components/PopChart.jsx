@@ -51,12 +51,25 @@ class PopChart extends Component {
 		],
 	};
 
+	handleOnClick = () => {
+		this.setState({
+			options: {
+				...this.state.options,
+				plotOptions: {
+					...this.state.options.plotOptions,
+					bar: { ...this.state.options.plotOptions.bar, horizontal: !this.state.options.plotOptions.bar.horizontal },
+				},
+			},
+		});
+	};
+
 	render() {
 		return (
 			<>
 				<Chart options={this.state.options} series={this.state.series} type="bar" height="450" width="100%" />
-				<button className="btn">Horizontal</button>
-				<button className="btn">Vertical</button>
+				<button className="btn" onClick={this.handleOnClick}>
+					{this.state.options.plotOptions.bar.horizontal ? 'Vertical' : 'Horizontal'}
+				</button>
 			</>
 		);
 	}
